@@ -3,7 +3,7 @@
 This repository contains implementation of the FAT file system for a 1 MB disk (virtual disk). The disk is divided into 4096 blocks each of size 256 bytes (4096*256 bytes = 1 MB). Each FAT entry is 4 bytes. As FAT contains one entry for each block of the disk, there will be 4096 entries in the FAT each of size 4 bytes. Thus FAT uses 16 KB (= 4096*4 bytes) space in the disk. The first 64 (=16 KB/256bytes) blocks (Block#0 to Block#63) are reserved to allocate the FAT array. Block#64 is also reserved for storing any system variable or data there if needed. The first block of the root directory is stored in Block#65. So the file number of the root directory is 65 in this system. Block#66 to Block#4095 can be used to store files and directories. The following figure illustrates the layout of the disk as discussed above.
 
 <p align="center">
-<img src="https://github.com/ieranik/rcm/images/fat1.png">
+<img src="https://github.com/ieranik/fat/blob/main/images/fat1.png">
 
 #Code Description
 
@@ -14,7 +14,7 @@ When a file is created, initially it contains the character ‘a’ in all its d
 The layout of the first block of a directory file is shown in the following figure. In the first 32 bytes, we store the parent directory number and any auxiliary information. Then 7 directory entries follow which store information about the child files and sub-directories located in the directory. Each directory entry is of size 32 bytes and contains the (file name, file number) pair and the metadata (creation time and size) of the corresponding child file or sub-directory. Note that, if a directory contains more than 7 child files and/or directories, new blocks need to be allocated each of which will store 8 (=256/32) directory entries. We use linear search to find, delete and insert directory entries. We don’t store size of directories.
 
 <p align="center">
-<img src="https://github.com/ieranik/rcm/images/fat2.png">
+<img src="https://github.com/ieranik/fat/blob/main/images/fat2.png">
 
 
 
